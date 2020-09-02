@@ -1,33 +1,37 @@
 import socket, json, keyboard, random
 
-adresses = []
-users = {}
-apple = [random.randint(1, 100) * 10, random.randint(1, 70) * 10]
-commands = ''
 sock = socket.socket()
-sock.bind(('127.0.0.1', 8082))
-sock.listen(5)
-
-def handler(message, conn):
-	global users
-	message = message.split(';')
-	for i in message:
-		if 'name' in message:
-			name = i.split(':')[1]
-			users[name] = [[[(200 - i * 10, 200), (10, 10)] for i in rang]
-		if 'apple' in message:
+sock.bind(('127.0.0.1', 8085))
+apple = [random.randint(0, 100) * 10, random.randint(0, 70)]
+users = {}
 
 
-while not keyboard.is_pressed('esc'):
-	conn, adress = sock.accept()
-	if adress not in adresses:
-		adresses.append(adress)
-	while True:
-		data = conn.recv(1024)
-		if not data:
-			break
-		data = bytes.decode(data)
-		commands += data
-		print(data)
-	if commands:
+class User:
+	def __init__(self, conn, adress, nick:str, direction:str, rects:list):
+		self.conn = conn
+		self.adress = adress
+		self.nick = nick
+		self.direction = direction
+		self.rects = rects
+		self.score = len(rects)
+	
+	def change_direction(self, direction):
+		self.direction = direction
+	
+	def add_score(self):
+		self.rects += 1
+	
+	def add_rect(self, x, y):
+		self.rects.append()
 
+
+def init_user(self, conn):
+
+
+
+def change_apple():
+	global apple
+	apple = [random.randint(0, 100) * 10, random.randint(0, 70)]
+
+
+commands = 
